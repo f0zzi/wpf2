@@ -104,10 +104,10 @@ namespace WpfApp1
                             db.Users.Remove(db.Users.Where(x => x.Id == user.Id).FirstOrDefault());
                         }
                     }
-                }
                 db.SaveChanges();
                 db.Users.Load();
                 userGrid.ItemsSource = db.Users.Local.ToBindingList();
+                }
             }
         }
         private void Tb_GotFocus(object sender, RoutedEventArgs e)

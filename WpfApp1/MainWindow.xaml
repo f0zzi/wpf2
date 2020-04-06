@@ -48,13 +48,13 @@
             <TabControl>
                 <TabItem Name="all_tab" Header="All customers">
                     <DockPanel>
-                        <DataGrid Name="userGrid" AutoGenerateColumns="False" DockPanel.Dock="Top" MinHeight="300" IsSynchronizedWithCurrentItem="False" IsManipulationEnabled="True" >
+                        <DataGrid Name="userGrid" AutoGenerateColumns="False" DockPanel.Dock="Top" MinHeight="300" IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                                 <DataGridTextColumn Binding="{Binding FirstName}" Header="First name"/>
                                 <DataGridTextColumn Binding="{Binding LastName}" Header="Last name"/>
                                 <DataGridTextColumn Binding="{Binding Email}" Header="E-mail"/>
-                                <DataGridTextColumn Binding="{Binding RoleId}" Header="Role"/>
+                                <DataGridTextColumn Binding="{Binding Role.Type}" Header="Role"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Height="50" DockPanel.Dock="Bottom" >
