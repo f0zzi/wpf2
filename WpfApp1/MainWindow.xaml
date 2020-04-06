@@ -46,9 +46,9 @@
                    />
             </Border>
             <TabControl>
-                <TabItem Name="all_tab" Header="All customers" GotFocus="Focus_all_tab">
+                <TabItem Name="all_tab" Header="All customers">
                     <DockPanel>
-                        <DataGrid Name="userGrid" AutoGenerateColumns="False" DockPanel.Dock="Top" MinHeight="300">
+                        <DataGrid Name="userGrid" AutoGenerateColumns="False" DockPanel.Dock="Top" MinHeight="300" IsSynchronizedWithCurrentItem="False" IsManipulationEnabled="True" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                                 <DataGridTextColumn Binding="{Binding FirstName}" Header="First name"/>
@@ -77,17 +77,17 @@
                         <StackPanel Orientation="Horizontal" Margin="20">
                             <Label Margin="1" MinWidth="150"
                                    Content="First name"/>
-                            <TextBox Name="tbFirstName" Width="200"/>
+                            <TextBox Name="tbFirstName" Width="200" GotFocus="Tb_GotFocus"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="20">
                             <Label Margin="1" MinWidth="150"
                                    Content="Last name"/>
-                            <TextBox Name="tbLastName" Width="200"/>
+                            <TextBox Name="tbLastName" Width="200" GotFocus="Tb_GotFocus"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="20">
                             <Label Margin="1" MinWidth="150"
                                    Content="E-mail"/>
-                            <TextBox Name="tbEmail" Width="200"/>
+                            <TextBox Name="tbEmail" Width="200" GotFocus="Tb_GotFocus"/>
                         </StackPanel>
                         <Button Click="Save_Click" Width="100">Save</Button>
                     </StackPanel>

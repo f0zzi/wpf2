@@ -57,15 +57,19 @@ namespace WpfApp1
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(tbFirstName.Text)
-                || !String.IsNullOrWhiteSpace(tbLastName.Text)
-                || !String.IsNullOrWhiteSpace(tbEmail.Text))
+                && !String.IsNullOrWhiteSpace(tbLastName.Text)
+                && !String.IsNullOrWhiteSpace(tbEmail.Text))
             {
                 using (db = new UserContext())
                 {
                     var role = db.Roles.Where(x => x.Type == cbRoles.SelectedItem.ToString()).Single();
                     db.Users.Add(new User() { FirstName = tbFirstName.Text, LastName = tbLastName.Text, Email = tbEmail.Text, RoleId = (role as Role).Id });
                     db.SaveChanges();
+                    db.Users.Load();
+                    userGrid.ItemsSource = db.Users.Local.ToBindingList();
                 }
+                cbRoles.SelectedIndex = 0;
+                tbEmail.Text = tbFirstName.Text = tbLastName.Text = "";
             }
             else
             {
@@ -97,25 +101,18 @@ namespace WpfApp1
                         User user = userGrid.SelectedItems[i] as User;
                         if (user != null)
                         {
-                            db.Users.Remove(user);
+                            db.Users.Remove(db.Users.Where(x => x.Id == user.Id).FirstOrDefault());
                         }
                     }
                 }
                 db.SaveChanges();
                 db.Users.Load();
-                userGrid.ItemsSource = null;
                 userGrid.ItemsSource = db.Users.Local.ToBindingList();
             }
         }
-
-        private void Focus_all_tab(object sender, RoutedEventArgs e)
+        private void Tb_GotFocus(object sender, RoutedEventArgs e)
         {
-            using (db = new UserContext())
-            {
-                db.Users.Load();
-                userGrid.ItemsSource = null;
-                userGrid.ItemsSource = db.Users.Local.ToBindingList();
-            }
+            (sender as TextBox).BorderBrush = Brushes.Black;
         }
     }
 }
